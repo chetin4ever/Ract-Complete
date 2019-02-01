@@ -129,21 +129,21 @@ ReactDOM.render(<IndecisionApp/> , document.getElementById('app'));
     //method binding 
     //this.props.options.bind({name:che});
 
-    const obj={
-        name:'chetan',
-        getname(){
-            return this.name;
-        }
-    }
-    console.log(obj.getname());
-    //const myName= obj.getname; // this causes error cannot read the proprerty of undefined
-    //console.log(myName());
+    // const obj={
+    //     name:'chetan',
+    //     getname(){
+    //         return this.name;
+    //     }
+    // }
+    // console.log(obj.getname());
+    // //const myName= obj.getname; // this causes error cannot read the proprerty of undefined
+    // //console.log(myName());
 
-    //soln to the problem is bind the method
-    const myName= obj.getname.bind(obj);
-    //or
-    const myName1= obj.getname.bind({name:'mahajan'});
+    // //soln to the problem is bind the method
+    // const myName= obj.getname.bind(obj);
+    // //or
+    // const myName1= obj.getname.bind({name:'mahajan'});
     
-    console.log(myName());
-    console.log(myName1());
+    // console.log(myName());
+    // console.log(myName1());
 
