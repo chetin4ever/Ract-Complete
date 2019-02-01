@@ -105,16 +105,25 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
 
-    function Options() {
+    function Options(props) {
         _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+        //method binding
+        // if you not bind then causes error in handleRemoveAll() function
+        // bind can be used inline or in constructor 
+
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
+
+        return _this4;
     }
 
     _createClass(Options, [{
         key: 'handleRemoveAll',
         value: function handleRemoveAll() {
-            alert('handleremoveAll');
+            //alert('handleremoveAll');
+            console.log(this.props.options);
         }
     }, {
         key: 'render',
@@ -220,12 +229,30 @@ ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementByI
 // ReactDOM.render(jsx,document.getElementById('app'));
 
 
-/*
-    error in my code 
+/* error in my code 
+  always forget this while calling the event for eg{ this.handleevent }
 
-    always forget this while calling the event for eg{ this.handleevent }
-    
-    forget the s in elements 
-    e.target.element.option.value
-
+ forget the s in elements 
+ e.target.element.option.value
 */
+
+//method binding 
+//this.props.options.bind({name:che});
+
+var obj = {
+    name: 'chetan',
+    getname: function getname() {
+        return this.name;
+    }
+};
+console.log(obj.getname());
+//const myName= obj.getname; // this causes error cannot read the proprerty of undefined
+//console.log(myName());
+
+//soln to the problem is bind the method
+var myName = obj.getname.bind(obj);
+//or
+var myName1 = obj.getname.bind({ name: 'mahajan' });
+
+console.log(myName());
+console.log(myName1());

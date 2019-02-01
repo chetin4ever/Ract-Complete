@@ -42,12 +42,26 @@ class Action extends React.Component{
 }
 
 class Options extends React.Component{
+
+    constructor(props){
+        super(props);
+        
+            //method binding
+            // if you not bind then causes error in handleRemoveAll() function
+            // bind can be used inline or in constructor 
+        
+            this.handleRemoveAll=this.handleRemoveAll.bind(this);
+        
+    }
+
     handleRemoveAll(){
-        alert('handleremoveAll');
+        //alert('handleremoveAll');
+        console.log(this.props.options);
     }
     render(){
         return(
             <div>
+                {/* this.handleremoveAll.bind(this); */}
                 <button onClick={this.handleRemoveAll}>RemoveAll</button>
                 {
                      this.props.options.map((option)=><Option key={option} optionText={option}/>)
@@ -104,13 +118,32 @@ ReactDOM.render(<IndecisionApp/> , document.getElementById('app'));
 
 
 
+    /* error in my code 
 
-/*
-    error in my code 
-
-    always forget this while calling the event for eg{ this.handleevent }
+     always forget this while calling the event for eg{ this.handleevent }
     
-    forget the s in elements 
-    e.target.element.option.value
+     forget the s in elements 
+     e.target.element.option.value
+    */
 
-*/
+    //method binding 
+    //this.props.options.bind({name:che});
+
+    const obj={
+        name:'chetan',
+        getname(){
+            return this.name;
+        }
+    }
+    console.log(obj.getname());
+    //const myName= obj.getname; // this causes error cannot read the proprerty of undefined
+    //console.log(myName());
+
+    //soln to the problem is bind the method
+    const myName= obj.getname.bind(obj);
+    //or
+    const myName1= obj.getname.bind({name:'mahajan'});
+    
+    console.log(myName());
+    console.log(myName1());
+
