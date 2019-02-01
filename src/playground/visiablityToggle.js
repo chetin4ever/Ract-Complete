@@ -44,6 +44,7 @@ ReactDOM.render(<Visiability para="this is the contenttt"/> ,document.getElement
 // //         bName="Hide";
 // //         visabilty=false;
 // //         content='here is the content';
+// //             <h1>visabilty Toogle</h1>
 // //         render();
 // //     }else{
 // //         bName="show";
@@ -57,7 +58,6 @@ ReactDOM.render(<Visiability para="this is the contenttt"/> ,document.getElement
 // // const render=()=>{
 // //     const tempalete=(
 // //         <div>
-// //             <h1>visabilty Toogle</h1>
 // //             <button onClick={onTog}>{bName}</button>
 // //             <p>{content}</p>
 // //         </div>
