@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,112 +8,119 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Counter = function (_React$Component) {
-  _inherits(Counter, _React$Component);
+var Visiability = function (_React$Component) {
+    _inherits(Visiability, _React$Component);
 
-  function Counter(props) {
-    _classCallCheck(this, Counter);
+    function Visiability(props) {
+        _classCallCheck(this, Visiability);
 
-    var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Visiability.__proto__ || Object.getPrototypeOf(Visiability)).call(this, props));
 
-    _this.handleAddOne = _this.handleAddOne.bind(_this);
-    _this.handleMinusOne = _this.handleMinusOne.bind(_this);
-    _this.handleReset = _this.handleReset.bind(_this);
-    _this.state = {
-      count: 0
-    };
-    return _this;
-  }
-
-  _createClass(Counter, [{
-    key: "render",
-    value: function render() {
-      return React.createElement(
-        "div",
-        null,
-        React.createElement(
-          "h1",
-          null,
-          "Count:",
-          this.state.count
-        ),
-        React.createElement(
-          "button",
-          { onClick: this.handleAddOne },
-          "+1"
-        ),
-        React.createElement(
-          "button",
-          { onClick: this.handleMinusOne },
-          "-1"
-        ),
-        React.createElement(
-          "button",
-          { onClick: this.handleReset },
-          "Reset"
-        )
-      );
-    }
-  }, {
-    key: "handleAddOne",
-    value: function handleAddOne() {
-      //console.log("handle one");
-      this.setState(function (prevState) {
-        return {
-          count: prevState.count + 1
+        _this.onToggle = _this.onToggle.bind(_this);
+        _this.state = {
+            visiablity: false,
+            para: _this.props.para
         };
-      });
+        return _this;
     }
-  }, {
-    key: "handleMinusOne",
-    value: function handleMinusOne() {
-      // console.log("handle minus");
-      this.setState(function (prevState) {
-        return {
-          count: prevState.count - 1
-        };
-      });
-    }
-  }, {
-    key: "handleReset",
-    value: function handleReset() {
-      console.log("handle reset");
-    }
-  }]);
 
-  return Counter;
+    _createClass(Visiability, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'h1',
+                    null,
+                    'Visiabilty Toggle'
+                ),
+                React.createElement(
+                    'button',
+                    { onClick: this.onToggle },
+                    this.state.visiablity ? 'Hide details' : 'Show Detail'
+                ),
+                this.state.visiablity && React.createElement(
+                    'p',
+                    null,
+                    ' this is the contents'
+                ),
+                this.state.visiablity && React.createElement(
+                    'p',
+                    null,
+                    ' ',
+                    this.state.para
+                )
+            );
+        }
+    }, {
+        key: 'onToggle',
+        value: function onToggle() {
+            //alert('toggle');
+            this.setState(function (prevState) {
+                return {
+                    visiablity: !prevState.visiablity
+                };
+            });
+        }
+    }]);
+
+    return Visiability;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Counter, null), document.getElementById("app"));
+ReactDOM.render(React.createElement(Visiability, { para: 'this is the contenttt' }), document.getElementById('app'));
 
-// /let count=0;
-// const someId="idhere";
-// const addOne=()=>{
-//     console.log('addOne');
-//     count++;
-//     renderCounterApp();
-// };
-// const minusOne=()=>{
-//     console.log('minusOne');
-//     count--;
-//     renderCounterApp();
-// };
-// const reset=()=>{
-//     console.log('reset');
-//     count=0;
-//     renderCounterApp();
-// };
-// const approot= document.getElementById('app');
-// const renderCounterApp=()=>{
-//     const templateFour =(
-//         <div>
-//             <h1>count:{count}</h1>
-//             <button id={someId} onClick={addOne}>+1</button>
-//             <button id={someId} onClick={minusOne}>-1</button>
-//             <button id={someId} onClick={reset}>reset</button>
-//         </div>
-//     );
-//     ReactDOM.render(templateFour,approot);
-// };
+// //my solution
+// // let visabilty=true;
+// // let bName='show';
+// // let content;
+// // const onTog=(e)=>{
+// //     if(visabilty){
+// //         bName="Hide";
+// //         visabilty=false;
+// //         content='here is the content';
+// //         render();
+// //     }else{
+// //         bName="show";
+// //         visabilty=true;
+// //         content='';
+// //         render();
+// //     }
 
-// renderCounterApp();
+// // }
+
+// // const render=()=>{
+// //     const tempalete=(
+// //         <div>
+// //             <h1>visabilty Toogle</h1>
+// //             <button onClick={onTog}>{bName}</button>
+// //             <p>{content}</p>
+// //         </div>
+
+// //     );
+// //     ReactDOM.render(tempalete,document.getElementById('app'));
+
+// // }
+// // render();
+
+// let visabilty=false;
+// const onTog=()=>{
+//     visabilty=!visabilty;
+//     render();
+// };
+// const render=()=>{
+//         const tempalete=(
+//             <div>
+//                 <h1>visabilty Toogle</h1>
+//                 <button onClick={onTog}>
+//                     { visabilty ? 'HIDE' : 'SHOW'}
+//                 </button>
+//                 { visabilty && (<p>this is the content</p>)}
+
+//             </div>
+
+//         );
+//         ReactDOM.render(tempalete,document.getElementById('app'));
+
+//     }
+//     render();
