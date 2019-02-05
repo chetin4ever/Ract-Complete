@@ -2,7 +2,7 @@ class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      options: ["Thing One", "Thing two", "Thing three"]
+      options: []
     };
     this.handleAddOption = this.handleAddOption.bind(this);
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
@@ -61,55 +61,85 @@ class IndecisionApp extends React.Component {
   }
 }
 
-class Header extends React.Component {
-  render() {
+const Header=(props)=>{
+  
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        <p>{this.props.subtitle}</p>
+        <h1>{props.title}</h1>
+        <p>{props.subtitle}</p>
       </div>
     );
-  }
+  
+}
+// class Header extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>{this.props.title}</h1>
+//         <p>{this.props.subtitle}</p>
+//       </div>
+//     );
+//   }
+// }
+
+const Action =(props)=>{
+  return (
+    <button onClick={props.handlePick} disabled={!props.hasOptions}>
+      what should i do?
+    </button>
+  );
+
+}
+// class Action extends React.Component {
+//   render() {
+//     return (
+//       <button onClick={this.props.handlePick} disabled={!this.props.hasOptions}>
+//         what should i do?
+//       </button>
+//     );
+//   }
+// }
+
+const Options = (props) =>{
+  return (
+    <div>
+      {/* this.handleremoveAll.bind(this); */}
+      <button onClick={props.handleDeleteOptions}>RemoveAll</button>
+      {props.options.map(option => (
+        <Option key={option} optionText={option} />
+      ))}
+    </div>
+  );
 }
 
-class Action extends React.Component {
-  render() {
-    return (
-      <button onClick={this.props.handlePick} disabled={!this.props.hasOptions}>
-        what should i do?
-      </button>
-    );
-  }
-}
+// class Options extends React.Component {
+//   // constructor(props){
+//   //     super(props);
 
-class Options extends React.Component {
-  // constructor(props){
-  //     super(props);
+//   //         //method binding
+//   //         // if you not bind then causes error in handleRemoveAll() function
+//   //         // bind can be used inline or in constructor
 
-  //         //method binding
-  //         // if you not bind then causes error in handleRemoveAll() function
-  //         // bind can be used inline or in constructor
+//   // //        this.handleRemoveAll=this.handleRemoveAll.bind(this);
 
-  // //        this.handleRemoveAll=this.handleRemoveAll.bind(this);
+//   // }
 
-  // }
-
-  // handleRemoveAll(){
-  //     //alert('handleremoveAll');
-  //     console.log(this.props.options);
-  // }
-  render() {
-    return (
-      <div>
-        {/* this.handleremoveAll.bind(this); */}
-        <button onClick={this.props.handleDeleteOptions}>RemoveAll</button>
-        {this.props.options.map(option => (
-          <Option key={option} optionText={option} />
-        ))}
-      </div>
-    );
-  }
-}
+//   // handleRemoveAll(){
+//   //     //alert('handleremoveAll');
+//   //     console.log(this.props.options);
+//   // }
+//   render() {
+//     return (
+//       <div>
+//         {/* this.handleremoveAll.bind(this); */}
+//         <button onClick={this.props.handleDeleteOptions}>RemoveAll</button>
+//         {this.props.options.map(option => (
+//           <Option key={option} optionText={option} />
+//         ))}
+//       </div>
+//     );
+//   }
+// }
 
 class AddOption extends React.Component {
   constructor(props){
@@ -146,17 +176,26 @@ class AddOption extends React.Component {
   }
 }
 
-class Option extends React.Component {
-  render() {
-    return (
-      <div>
-        <ol>
-          <li>{this.props.optionText}</li>
-        </ol>
-      </div>
-    );
-  }
+const Option=(props)=>{
+  return (
+    <div>
+      
+        <li>{props.optionText}</li>
+      
+    </div>
+  );
 }
+// class Option extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <ol>
+//           <li>{this.props.optionText}</li>
+//         </ol>
+//       </div>
+//     );
+//   }
+// }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
 
