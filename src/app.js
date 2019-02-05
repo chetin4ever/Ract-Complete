@@ -4,6 +4,7 @@ class IndecisionApp extends React.Component {
     this.state = {
       options: ["Thing One", "Thing two", "Thing three"]
     };
+    this.handleAddOption = this.handleAddOption.bind(this);
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
   }
@@ -16,9 +17,24 @@ class IndecisionApp extends React.Component {
   }
   handlePick() {
     // alert('handlePick');
-    const randomNum=Math.floor(Math.random()*this.state.options.length);
-    const option=this.state.options[randomNum];
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
     alert(option);
+  }
+  handleAddOption(option){
+    console.log(option);
+    if(!option){
+      //if no value is enter
+      return 'Enter Valid value to add item';
+    }else if(this.state.options.indexOf(option)> -1){
+      return 'this option already exists!';
+    }
+    this.setState((prevState)=>{
+        return{
+         // options: prevState.options.concat([option])//or
+          options: prevState.options.concat(option)
+        };
+    });  
   }
   render() {
     const title = "IndescionApp";
@@ -37,7 +53,9 @@ class IndecisionApp extends React.Component {
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
         />
-        <AddOption />
+        <AddOption 
+          handleAddOption={this.handleAddOption}
+        />
       </div>
     );
   }
@@ -94,20 +112,36 @@ class Options extends React.Component {
 }
 
 class AddOption extends React.Component {
+  constructor(props){
+      super(props);
+      this.handleAddOption=this.handleAddOption.bind(this);
+      this.state={
+        error: undefined
+      }
+  }
   handleAddOption(e) {
     e.preventDefault();
     const option = e.target.elements.option.value.trim();
-    if (option) {
-      alert("addoption");
-    }
+    const error =this.props.handleAddOption(option);
+    this.setState(()=>{
+        return{
+          //error:error
+          error
+        }
+    });
   }
+
   render() {
     return (
+      <div>
+      {this.state.error && <p>{this.state.error}</p>}
       <form onSubmit={this.handleAddOption}>
         <Option />
         <input type="text" name="option" />
         <button>ADD</button>
       </form>
+      </div>
+      
     );
   }
 }
@@ -137,11 +171,11 @@ ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
 // );
 // ReactDOM.render(jsx,document.getElementById('app'));
 
-/* error in my code 
+/* error in my code
 
      always forget this while calling the event for eg{ this.handleevent }
-    
-     forget the s in elements 
+
+     forget the s in elements
      e.target.element.option.value
     */
 
