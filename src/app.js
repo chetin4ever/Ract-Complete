@@ -1,8 +1,10 @@
 class IndecisionApp extends React.Component {
   constructor(props) {
+  console.log(props.options);
+
     super(props);
     this.state = {
-      options: []
+      options:props.options
     };
     this.handleAddOption = this.handleAddOption.bind(this);
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
@@ -11,7 +13,7 @@ class IndecisionApp extends React.Component {
   handleDeleteOptions() {
     this.setState(() => {
       return {
-        options: []
+        options:[]
       };
     });
   }
@@ -37,13 +39,13 @@ class IndecisionApp extends React.Component {
     });  
   }
   render() {
-    const title = "IndescionApp";
     const subtitle = "Put your life in the hands of a computer";
 
     return (
       <div>
         <h1>Title</h1>
-        <Header title={title} subtitle={subtitle} />
+        
+        <Header subtitle={subtitle} />
         {/* had option based on options array is empty or contain data */}
         <Action
           hasOptions={this.state.options.length > 0}
@@ -60,16 +62,22 @@ class IndecisionApp extends React.Component {
     );
   }
 }
+IndecisionApp.defaultProps={
+  options:[]
+}
 
 const Header=(props)=>{
   
     return (
       <div>
         <h1>{props.title}</h1>
-        <p>{props.subtitle}</p>
+        { props.subtitle &&  <h2>{props.subtitle}</h2>}
       </div>
     );
-  
+}
+
+Header.defaultProps={
+  title:'Indecision App',
 }
 // class Header extends React.Component {
 //   render() {
@@ -197,7 +205,7 @@ const Option=(props)=>{
 //   }
 // }
 
-ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
+ReactDOM.render(<IndecisionApp options = {['one','tow ','three']}/>, document.getElementById("app"));
 
 // const jsx=(
 //     <div>
