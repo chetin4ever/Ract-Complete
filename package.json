@@ -245,7 +245,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "live-server public/",
-    "build": "webpack --watch --mode production",
+    "build": "webpack --watch --mode development",
     "build-babel": "babel  src/app.js --out-file=public/script/app.js --presets=env,react --watch",
     "dev": "webpack --mode development --env.dist=false",
     "dev:dist": "webpack --mode development"
