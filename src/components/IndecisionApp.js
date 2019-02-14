@@ -3,22 +3,15 @@ import AddOption from './AddOption';
 import Options from './Options';
 import Header from './Header';
 import Action from './Action';
+import OptionModal from './OptionModal';
+
 
 export default class IndecisionApp extends React.Component {
-    constructor(props) {
-      // console.log(props.options);
-      super(props);
-  
-      this.handleAddOption = this.handleAddOption.bind(this);
-      this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-      this.handleDeleteOption = this.handleDeleteOption.bind(this);
-      this.handlePick = this.handlePick.bind(this);
-  
-      this.state = {
-        options: []
-      };
-    }
-    componentDidMount() {
+    state = {
+      options: [],
+      selectedOption:undefined
+    };  
+    componentDidMount=()=> {
       try {
         const json = localStorage.getItem("options");
         const options = JSON.parse(json);
@@ -29,25 +22,29 @@ export default class IndecisionApp extends React.Component {
         //do noting
       }
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate=(prevProps, prevState)=> {
       if (prevState.options.length !== this.state.options.length) {
         const json = JSON.stringify(this.state.options);
         localStorage.setItem("options", json);
         console.log("saving data");
       }
     }
-    componentWillUnmount() {
+   
+    componentWillUnmount=()=> {
       console.log("component will unmounted !");
       //try to unmount the component unsing the follwing line
       //ReactDOM.render(React.createElement('p'),document.getElementById('app'));
     }
   
     // for deleting all items from the list
-    handleDeleteOptions() {
+    handleDeleteOptions=()=> {
       this.setState(() => ({ options: [] }));
     }
+    handleSelectedOption=()=>{
+      this.setState(()=>({selectedOption:undefined}))
+    }
     //for deleting specific item from list
-    handleDeleteOption(optionToRemove) {
+    handleDeleteOption=(optionToRemove)=>{
       console.log("hdo", optionToRemove);
       this.setState(prevState => ({
         options: prevState.options.filter(option => {
@@ -56,14 +53,18 @@ export default class IndecisionApp extends React.Component {
       }));
     }
     // picking random task to done
-    handlePick() {
+    handlePick=()=>{
       // alert('handlePick');
       const randomNum = Math.floor(Math.random() * this.state.options.length);
       const option = this.state.options[randomNum];
-      alert(option);
+      //alert(option);
+      this.setState(()=>({
+        selectedOption:option 
+      }));
+
     }
     //add task to the list
-    handleAddOption(option) {
+    handleAddOption=(option)=> {
       if (!option) {
         //if no value is enter
         return "Enter Valid value to add item";
@@ -92,6 +93,10 @@ export default class IndecisionApp extends React.Component {
             handleDeleteOption={this.handleDeleteOption}
           />
           <AddOption handleAddOption={this.handleAddOption} />
+          <OptionModal 
+            selectedOption={this.state.selectedOption}
+            handleSelectedOption={this.handleSelectedOption} 
+          />
         </div>
       );
     }

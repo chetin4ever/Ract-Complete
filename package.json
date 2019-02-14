@@ -40,6 +40,7 @@
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "babel-plugin-transform-es2015-block-scoped-functions": "^6.22.0",
     "babel-plugin-transform-es2015-block-scoping": "^6.26.0",
@@ -190,6 +191,7 @@
     "randomatic": "^3.1.1",
     "react": "16.8.1",
     "react-dom": "16.8.1",
+    "react-modal": "3.8.1",
     "readable-stream": "^2.3.6",
     "readdirp": "^2.2.1",
     "regenerate": "^1.4.0",
@@ -237,6 +239,7 @@
     "v8flags": "^2.1.1",
     "validator": "10.11.0",
     "webpack": "^4.29.3",
+    "webpack-dev-server": "^3.1.14",
     "wrappy": "^1.0.2"
   },
   "devDependencies": {
@@ -245,8 +248,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "live-server public/",
-    "build": "webpack --watch --mode development",
-    "build-babel": "babel  src/app.js --out-file=public/script/app.js --presets=env,react --watch",
+    "dev-server": "webpack-dev-server",
+    "build": "webpack --mode development",
     "dev": "webpack --mode development --env.dist=false",
     "dev:dist": "webpack --mode development"
   },
