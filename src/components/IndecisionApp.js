@@ -81,7 +81,8 @@ export default class IndecisionApp extends React.Component {
   
       return (
         <div>
-          <Header subtitle={subtitle} />
+         <div className="container">
+         <Header subtitle={subtitle} />
           {/* had option based on options array is empty or contain data */}
           <Action
             hasOptions={this.state.options.length > 0}
@@ -93,6 +94,7 @@ export default class IndecisionApp extends React.Component {
             handleDeleteOption={this.handleDeleteOption}
           />
           <AddOption handleAddOption={this.handleAddOption} />
+         </div>
           <OptionModal 
             selectedOption={this.state.selectedOption}
             handleSelectedOption={this.handleSelectedOption} 
